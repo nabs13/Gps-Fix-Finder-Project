@@ -11,8 +11,8 @@ SoftwareSerial ss(3, 4);
 
 void setup() {
   
-  Serial.begin(9600);
-  ss.begin(9600);
+  Serial.begin(9600); // Initializing serial communication
+  ss.begin(9600);//Initializing Gps baud communication
   
   lcd.init();
   lcd.backlight();
@@ -26,7 +26,7 @@ void setup() {
 
 void loop() {
   
-  bool newData = false;
+  bool newData = false; // 
   unsigned long chars;
   unsigned short sentences, failed;
 
@@ -45,7 +45,7 @@ if(newData)
 {
   float flat, flon;
     unsigned long age;
-    gps.f_get_position(&flat, &flon, &age);
+    gps.f_get_position(&flat, &flon, &age); // get longitude, latitude and age
 
     lcd.clear();
     lcd.setCursor(0,0);
@@ -55,7 +55,7 @@ if(newData)
   
     
     lcd.print("SAT=");
-    lcd.print(gps.satellites() == TinyGPS::GPS_INVALID_SATELLITES ? 0 : gps.satellites());
+    lcd.print(gps.satellites() == TinyGPS::GPS_INVALID_SATELLITES ? 0 : gps.satellites());// Display number of satelite fixes
     delay(2000);
 
     lcd.setCursor(0,0);
@@ -65,11 +65,13 @@ if(newData)
     
     lcd.setCursor(0,0);
     lcd.print("LAT=");
-    lcd.print(flat == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flat, 6);
+    lcd.print(flat == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flat, 6); // Display Latitude
+
     
     lcd.setCursor(0,1);
     lcd.print("LON=");
-    lcd.print(flon == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flon, 6);
+    lcd.print(flon == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flon, 6); // Display Longitude 
+
     delay(2000);
     lcd.clear();
     }
